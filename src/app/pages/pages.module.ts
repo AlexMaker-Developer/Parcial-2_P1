@@ -12,8 +12,8 @@ import { ComponentsModule } from '../components/components.module';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
-
-
+import {HttpClientModule} from '@angular/common/http'
+import {AppRoutingModule  } from "../app-routing.module";
 
 @NgModule({
   declarations: [
@@ -33,6 +33,6 @@ import { RxjsComponent } from './rxjs/rxjs.component';
     AccountSettingsComponent
   ],
   imports: [
-    CommonModule, SharedModule, RouterModule, FormsModule,ComponentsModule],
+    CommonModule, SharedModule, RouterModule, FormsModule,ComponentsModule, HttpClientModule, AppRoutingModule],
 })
 export class PagesModule { }
