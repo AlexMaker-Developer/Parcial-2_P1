@@ -7,21 +7,23 @@ import { tap, map, catchError } from 'rxjs/operators';
 import { createUrlResolverWithoutPackagePrefix } from '@angular/compiler';
 import { Observable, of } from 'rxjs';
 
-const base_url = environment.base_url;
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class UsuariosService {
+  base_url = environment.base_url;
   constructor(private http: HttpClient) { }
 
   crearUsuario(formData: RegisterForm){
-  return this.http.post(`${base_url}/usuarios`, formData);
+  return this.http.post(`${this.base_url}/usuarios`, formData);
     }
 
     login(formData: LoginForm) {
-      return this.http.post(`${base_url}/auth/login`, formData).pipe(
+      return this.http.post(`${this.base_url}/auth/login`, formData).pipe(
         tap((resp: any) => {
+          console.log(resp);
           localStorage.setItem('token', resp.data);
         })
       );
@@ -29,7 +31,7 @@ export class UsuariosService {
 
     loginGoogle(token) {
       console.log(token);
-      return this.http.post(`${base_url}/auth/google`, { token }).pipe(
+      return this.http.post(`${this.base_url}/auth/google`, { token }).pipe(
         tap((resp: any) => {
           //console.log(resp.data);
           localStorage.setItem('token', resp.data);
@@ -41,7 +43,7 @@ export class UsuariosService {
       const token = localStorage.getItem('token') || '';
       const email = localStorage.getItem('email') || '';
 
-      return this.http.post(`${base_url}/auth/renew`, { email, token }).pipe(
+      return this.http.post(`${this.base_url}/auth/renew`, { email, token }).pipe(
         tap((resp: any) => {
           localStorage.setItem('token', resp.data);
         }),
