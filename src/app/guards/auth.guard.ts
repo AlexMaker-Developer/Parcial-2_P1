@@ -14,6 +14,7 @@ export class AuthGuard implements CanActivate {
     console.log("paso por el guardian");
     return this.usuariosService.validarToken().pipe(
       tap(isAuth=>{
+        //console.log(isAuth);
         if(!isAuth){
           this.router.navigateByUrl('/login');
         }
